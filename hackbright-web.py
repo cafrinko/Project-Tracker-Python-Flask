@@ -12,10 +12,14 @@ def get_student():
     github = request.args.get('github','0')
     first, last, github = hackbright.get_student_by_github(github)
     # return "%s is the GitHub account for %s %s" % (github, first, last)
+
+    project_titles_grades = hackbright.get_grades_by_github(github)
+
     html = render_template("student_info.html",
                             first=first,
                             last=last,
-                            github=github)
+                            github=github,
+                            projecttitlesgrades=project_titles_grades)
     return html
 
 @app.route("/student-search")
